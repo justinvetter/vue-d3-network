@@ -27,24 +27,22 @@
     //- -> nodes
     g.nodes#l-nodes(v-if='!noNodes')
       template(v-for='(node,key) in nodes')
-        svg(v-if='svgIcon(node)'
-          :key='key'
-          :viewBox='svgIcon(node).attrs.viewBox'
-          :width='getNodeSize(node, "width")'
-          :height='getNodeSize(node, "height")'
-          @click='emit("nodeClick",[$event,node])'
-          @mouseover='emit("mouseOverNode",[$event,node])'
-          @touchend.passive='emit("nodeClick",[$event,node])'
-          @mousedown.prevent='emit("dragStart",[$event,key])'
-          @touchstart.prevent='emit("dragStart",[$event,key])'
-          :x='node.x - getNodeSize(node, "width") / 2'
-          :y='node.y - getNodeSize(node, "height") / 2'
-          :style='nodeStyle(node)'
-          :title="node.name"
-          :class='nodeClass(node,["node-svg"])'
-          v-html='svgIcon(node).data'
-          v-bind='node._svgAttrs'
-          )
+        //- default circle nodes
+        circle(v-if='linkLables'
+        :key='key'
+        :r="getNodeSize(node) / 2"
+        @click='emit("nodeClick",[$event,node])'
+        @mouseover='emit("mouseOverNode",[$event,node])'
+        @touchend.passive='emit("nodeClick",[$event,node])'
+        @mousedown.prevent='emit("dragStart",[$event,key])'
+        @touchstart.prevent='emit("dragStart",[$event,key])'
+        :cx="node.x"
+        :cy="node.y"
+        :style='nodeStyle(node)'
+        :title="node.name"
+        :class="nodeClass(node)"
+        v-bind='node._svgAttrs'
+        )
 
         //- default circle nodes
         circle(v-else
@@ -61,9 +59,8 @@
         :title="node.name"
         :class="nodeClass(node)"
         v-bind='node._svgAttrs'
-        v-tooltip="node.name"
+        v-tooltip="{ content: node.name, trigger: 'hover click'}"
         )
-          title.tooltip {{node.name}}
 
     //-> Links Labels
     g.labels#link-labels(v-if='linkLabels')
@@ -73,8 +70,8 @@
     //- -> Node Labels
     g.labels#node-labels( v-if="nodeLabels")
       text.node-label(v-for="node in nodes"
-        :x='node.x + (getNodeSize(node) / 2) + (fontSize / 2)'
-        :y='node.y + labelOffset.y'
+        :x='node.x'
+        :y='node.y + (getNodeSize(node) / 2) + (fontSize)'
         :font-size="fontSize"
         :class='(node._labelClass) ? node._labelClass : ""'
         :stroke-width='fontSize / 8'
