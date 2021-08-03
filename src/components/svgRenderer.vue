@@ -18,6 +18,7 @@
           :id="link.id"
           @click='emit("linkClick",[$event,link])'
           @touchstart.passive='emit("linkClick",[$event,link])'
+          @mouseover='emit("mouseOverLink", [$event,link])'
           v-bind='linkAttrs(link)'
           :class='linkClass(link.id)'
           :style='linkStyle(link)'
@@ -32,6 +33,7 @@
           :width='getNodeSize(node, "width")'
           :height='getNodeSize(node, "height")'
           @click='emit("nodeClick",[$event,node])'
+          @mouseover='emit("mouseOverNode",[$event,node])'
           @touchend.passive='emit("nodeClick",[$event,node])'
           @mousedown.prevent='emit("dragStart",[$event,key])'
           @touchstart.prevent='emit("dragStart",[$event,key])'
@@ -49,6 +51,7 @@
         :key='key'
         :r="getNodeSize(node) / 2"
         @click='emit("nodeClick",[$event,node])'
+        @mouseover='emit("mouseOverNode",[$event,node])'
         @touchend.passive='emit("nodeClick",[$event,node])'
         @mousedown.prevent='emit("dragStart",[$event,key])'
         @touchstart.prevent='emit("dragStart",[$event,key])'
