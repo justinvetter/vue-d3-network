@@ -61,8 +61,8 @@
         :title="node.name"
         :class="nodeClass(node)"
         v-bind='node._svgAttrs'
-            title
         )
+          title.tooltip {{node.name}}
 
     //-> Links Labels
     g.labels#link-labels(v-if='linkLabels')
