@@ -70,8 +70,8 @@
     //- -> Node Labels
     g.labels#node-labels( v-if="nodeLabels")
       text.node-label(v-for="node in nodes"
-        :x='node.x - (getNodeSize(node))'
-        :y='node.y + (getNodeSize(node)) + (fontSize)'
+        :x='node.x - (getNodeSize(node) / 2)'
+        :y='node.y + (getNodeSize(node)) + (fontSize / 2)'
         :font-size="fontSize"
         :class='(node._labelClass) ? node._labelClass : ""'
         :stroke-width='fontSize / 8'
