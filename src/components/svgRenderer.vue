@@ -61,7 +61,7 @@
         :title="node.name"
         :class="nodeClass(node)"
         v-bind='node._svgAttrs'
-          title
+            title
         )
 
     //-> Links Labels
