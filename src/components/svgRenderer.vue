@@ -28,7 +28,7 @@
     g.nodes#l-nodes(v-if='!noNodes')
       template(v-for='(node,key) in nodes')
         //- default circle nodes
-        circle(v-if='linkLabels'
+        circle(v-if='nodeLabels'
         :key='key'
         :r="getNodeSize(node) / 2"
         @click='emit("nodeClick",[$event,node])'
@@ -70,8 +70,8 @@
     //- -> Node Labels
     g.labels#node-labels( v-if="nodeLabels")
       text.node-label(v-for="node in nodes"
-        :x='node.x'
-        :y='node.y + (getNodeSize(node)) + (fontSize * 1.5)'
+        :x='node.x - (getNodeSize(node))'
+        :y='node.y + (getNodeSize(node)) + (fontSize)'
         :font-size="fontSize"
         :class='(node._labelClass) ? node._labelClass : ""'
         :stroke-width='fontSize / 8'
