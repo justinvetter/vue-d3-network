@@ -61,6 +61,7 @@
         :title="node.name"
         :class="nodeClass(node)"
         v-bind='node._svgAttrs'
+        v-tooltip="node.name"
         )
           title.tooltip {{node.name}}
 
